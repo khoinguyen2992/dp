@@ -16,7 +16,35 @@ type Message interface {
 	Content() string
 }
 
-// Generate is template method to render message following a fix format
+// Generate is template method to render message following a fixed format
 func Generate(m Message) string {
 	return fmt.Sprintf("%s, %s", m.Greeting(), m.Content())
+}
+
+// DefaultMessage is common methods
+type DefaultMessage struct{}
+
+// Greeting ...
+func (m *DefaultMessage) Greeting() string {
+	return "Hello"
+}
+
+// ApproveMessage ...
+type ApproveMessage struct {
+	DefaultMessage
+}
+
+// Content ...
+func (m *ApproveMessage) Content() string {
+	return "you are approved."
+}
+
+// RejectMessage ...
+type RejectMessage struct {
+	DefaultMessage
+}
+
+// Content ...
+func (m *RejectMessage) Content() string {
+	return "you are rejected."
 }
